@@ -48,14 +48,53 @@ All database operations are handled using **Django ORM** (no raw SQL).
 ---
 
 ## 🚀 How to Run the Project (Step-by-Step)
+## Project Setup & Execution Steps (macOS)
 
-### ✅ Step 1: Clone the Repository
-```bash
-git clone <your-github-repo-url>
-cd hall-booking-system/backend
-```
-### ✅ Step 2: Create and Activate Virtual Environment
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
+**Step 1: Install Dependencies**  
+Run the following command to install all required Python packages:  
+`pip install django djangorestframework psycopg2-binary django-cors-headers python-dotenv`
+
+**Step 2: Install and Start PostgreSQL**  
+Install PostgreSQL and start the service:  
+`brew install postgresql`  
+`brew services start postgresql`  
+
+Verify installation:  
+`psql --version`
+
+**Step 3: Create Database and User**  
+Open PostgreSQL shell:  
+`psql postgres`  
+
+Create database and user:  
+`CREATE DATABASE hall_booking_db;`  
+`CREATE USER halluser WITH PASSWORD 'hallpass';`  
+`GRANT ALL PRIVILEGES ON DATABASE hall_booking_db TO halluser;`  
+Exit shell:  
+`\q`
+
+**Step 4: Configure Django Database**  
+Open the file:  
+`backend/backend/settings.py`  
+
+Update the database configuration:
+`DATABASES = {'default': {'ENGINE': 'django.db.backends.postgresql','NAME': 'hall_booking_db','USER': 'halluser','PASSWORD': 'hallpass','HOST': 'localhost','PORT': '5432'}}`
+
+**Step 5: Run Migrations**  
+Apply database migrations:  
+`python3 manage.py makemigrations`  
+`python3 manage.py migrate`
+
+**Step 6: Create Superuser**  
+Create an admin user for Django Admin:  
+`python3 manage.py createsuperuser`
+
+**Step 7: Start Development Server**  
+Run the Django server:  
+`python3 manage.py runserver`
+
+**Access URLs**  
+Home: `http://127.0.0.1:8000/`  
+Admin Panel: `http://127.0.0.1:8000/admin/`  
+Bookings API: `http://127.0.0.1:8000/api/bookings/`
+
