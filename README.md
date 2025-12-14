@@ -54,7 +54,7 @@ All database operations are handled using **Django ORM** (no raw SQL).
 git clone <your-github-repo-url>
 cd hall-booking-system/backend
 
-##✅ Step 2: Create and Activate Virtual Environment
+### ✅ Step 2: Create and Activate Virtual Environment
 ```bash
 python3 -m venv venv
 source venv/bin/activate
